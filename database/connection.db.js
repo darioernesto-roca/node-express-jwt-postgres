@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import pg from 'pg';
 
 const { Pool } = pg;
@@ -7,3 +8,10 @@ export const db = new Pool({
     allowExitOnIdle: true,
     connectionString,
 });
+
+try {
+    await db.query(`SELECT NOW()`);
+    console.log('Database connected');
+} catch (error) {
+    console.error(error);
+}
